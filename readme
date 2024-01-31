@@ -1,0 +1,86 @@
+Steps :
+Virtual Machine Setup:
+
+    Choose a virtualization software and download the latest version.
+    Download a desired Linux ISO image.
+    Create a new VM according to your resource availability and the provided Dockerfile requirements.
+    Allocate an appropriate amount of RAM, CPU cores, and disk space.
+    Configure network settings as necessary (bridged mode recommended).
+    Boot the VM with the Linux ISO image.
+
+Linux Installation:
+
+    Follow the on-screen instructions to install Linux on the VM.
+    Select the appropriate language, keyboard layout, and time zone.
+    Choose manual partitioning and create two partitions:
+        Primary partition for the root filesystem (ext4 format).
+        Extended partition for swap space (swap format).
+    Configure swap space for hibernation and virtual memory management.
+    Set a strong password for the root user.
+    Update the package lists and upgrade the system:
+    Bash
+
+    sudo apt update && sudo apt upgrade 
+
+Docker Installation:
+
+    Download the Docker installation package or script for your specific Linux distribution.
+    Follow the installation instructions, which usually involve granting root privileges and restarting services:
+    Bash
+
+    sudo sh Docker-install.sh
+    sudo systemctl start docker
+    sudo systemctl enable docker
+
+Verify Docker installation:
+Bash
+
+docker version
+
+Dockerfile Configuration:
+
+    If you were provided with a Dockerfile, review its contents to understand the specific steps involved in building your image.
+    Common Dockerfile instructions include:
+        FROM: Specifies the base image to inherit from.
+        RUN: Executes commands to install software, copy files, etc.
+        WORKDIR: Sets the working directory for subsequent commands.
+        CMD or ENTRYPOINT: Sets the default command to run within the image.
+    If required, modify the Dockerfile to suit your specific requirements.
+
+Image Building:
+
+    Navigate to the directory containing the Dockerfile in your VM.
+    Build the image using the docker build command, specifying the build context directory and a tag:
+    Bash
+
+    docker build -t <your_username>/<image_name> .
+
+
+    Replace <your_username> with your Docker Hub username and <image_name> with a desired name.
+    The build process may take some time depending on the size and complexity of the Dockerfile.
+
+Image Pushing:
+
+    Log in to your Docker Hub account using the CLI:
+    Bash
+
+    docker login
+
+
+
+Enter your Docker Hub username and password when prompted.
+Push the built image to your Docker Hub repository:
+Bash
+
+docker push <your_username>/<image_name
+
+        It may take several minutes for the image to be uploaded to Docker Hub.
+
+    Verification and Troubleshooting:
+        Visit your Docker Hub repository to confirm the uploaded image.
+        If you encounter issues, consult the Docker documentation or online forums for assistance.
+        Common troubleshooting steps include:
+            Verifying Docker installation and configuration.
+            Checking network connectivity and firewall rules.
+            Examining Docker build logs for error messages.
+
